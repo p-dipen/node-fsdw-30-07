@@ -61,10 +61,24 @@ fs.unlink('output.txt', (err) => {
 - Try reading and writing to `text.txt` using the above examples.
 - Experiment with creating and deleting files.
 
+---
+
+## Running task.js inside Lesson1 Folder
+
+To execute the `task.js` file and see its output, open your terminal, navigate to the `Lesson1` folder, and run:
+
+```bash
+node task.js
+```
+
+This will execute the code in `task.js` and display the output in your terminal.
+
+---
+
 ## Summary
 
 The fs module is a core part of Node.js and is essential for backend development. Practice using its methods to become comfortable with file operations.
 
 ---
 
-_Dipen is teaching fs (file system module) in Node.js._
+\_Dipen is teaching fs (file system module) in
