@@ -2,20 +2,28 @@
 const fs = require('fs');
 // Async readFile
 function readFileAsync(filePath) {
-  console.log(filePath);
+  console.log('readFileAsync');
   fs.readFile(filePath, function (err, data) {
     if (err) {
       console.error(err);
       throw err;
     }
-    console.log('Data this is from readFile:--', data.toString('utf-8'));
+    let lineCount = data.toString('utf-8').split('\n').length;
+    console.log('Data this is from readFileAsync:--', lineCount);
   });
 }
-module.exports = { readFileAsync };
-// How to export functions :---
 
-// const data = fs.readFileSync(filePath);
+function readFileSync(filePath) {
+  /* Sync of try catch block */
+  // try {
 
-// console.log('data from readFileSYnc: --', data.toString('utf-8'));
+  // } catch (err) {
 
-// console.log('This is line should come after readFile');
+  // }
+  console.log('readFileSync');
+  const data = fs.readFileSync(filePath, 'utf-8');
+  let lineCount = data.split('\n').length;
+  console.log('Data this is from readFileSync:--', lineCount);
+}
+
+module.exports = { readFileAsync, readFileSync };

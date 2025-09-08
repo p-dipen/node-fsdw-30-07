@@ -12,7 +12,7 @@ hello();
     require('library');
 
     Three type of modules : 
-    1. Internal Module
-    2. User-created Module
-    3. third party modules from npm(Node package manager)
+    1. Internal Module - require('fs');
+    2. User-created Module - require('./console')
+    3. third party modules from npm(Node package manager) - require('hello-world-npm')
 */
