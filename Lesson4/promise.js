@@ -3,23 +3,32 @@ let firstFileName = './Files/first.txt';
 const fs = require('fs/promises');
 // Async func
 function customReadFile(path) {
-  return fs
-    .readFile(path)
-    .then(function (data) {
-      let dataToString = data.toString();
-      console.log('Inside Log CB ', dataToString);
-      return dataToString;
-    })
-    .catch(function (err) {
-      console.error(err);
-      return;
-    });
+  // Returning Promise
+  return fs.readFile(path);
+}
+
+try {
+} catch (err) {
+  console.error('Catch in block', err);
 }
 
 customReadFile(firstFileName)
   .then(function (data) {
-    return customReadFile(data);
+    console.log('First then');
+    return customReadFile(data.toString());
   })
   .then(function (data) {
+    console.log('Second then');
     return customReadFile(data);
+  })
+  .catch(function (err) {
+    console.error('Error from second then ', err);
   });
+
+// .then(function (data) {
+//   console.log('Second then');
+//   return customReadFile(data);
+// })
+// .catch(function (err) {
+//   console.error('Error from second then ', err);
+// });

@@ -3,7 +3,6 @@ const http = require('http');
 
 function fetchApi(url, index, callback) {
   console.log(`🟡 Request ${index + 1} started: ${url}`);
-
   let seconds = 0;
   const timer = setInterval(() => {
     console.log(`⏳ Request ${index + 1} in progress: ${seconds}s\r`);

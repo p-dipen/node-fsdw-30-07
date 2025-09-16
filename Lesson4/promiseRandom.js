@@ -12,3 +12,24 @@ const output = promise.then(function (data) {
   return data;
 });
 console.log('Line 14 : ', output);
+
+/* 
+
+let myPromise = new Promise(function(myResolveCb,myRejectCb) {
+
+  if(success) {
+    myResolveCb(); // when Successful
+  } else if(rejectMyPromise) {
+    myRejectCb(); // when error;
+  }
+});
+
+
+"Consuming Code" (Must wait for fulfilled Promise) 
+myPromise.then(function(data) {
+  Code if successful
+}).catch(function (err) {
+  Code if some error 
+})
+
+*/
