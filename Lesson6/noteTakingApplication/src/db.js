@@ -11,14 +11,13 @@ function saveDB(data) {
   return fs.writeFile(DB_PATH, JSON.stringify(data, null, 2));
 }
 function parseData(databaseData, note) {
-  console.log('databaseData -- ', databaseData);
   // 3. Funtion get triggered
   var db = JSON.parse(databaseData);
   db.notes.push(note);
   return db;
 }
 function insert(note) {
-  if (note == '') {
+  if (note == undefined || note == '') {
     throw new Error('Data is null');
   }
   // 2. Function is triggered
@@ -28,6 +27,5 @@ function insert(note) {
     })
     .then(saveDB);
 }
-// 1. Function I am triggering
-insert('New notes notes');
+
 module.exports = { insert, getData };
