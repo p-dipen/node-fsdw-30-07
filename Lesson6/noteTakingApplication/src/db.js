@@ -28,4 +28,4 @@ function insert(note) {
     .then(saveDB);
 }
 
-module.exports = { insert, getData };
+module.exports = { insert, getData, saveDB };
