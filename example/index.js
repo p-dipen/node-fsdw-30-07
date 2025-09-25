@@ -38,6 +38,17 @@ app.post('/submit', function (request, response) {
   }
 });
 
+// You dont need to import jade
+app.set('view engine', 'jade');
+app.set('views', './view');
+// Jade (Pug), EJS
+app.get('/webpage', function (request, response) {
+  response.render('first_view', {
+    title: 'Hello Title Dynamic',
+    name: request.query.name,
+  });
+});
+
 app.listen(3000, function () {
   console.log(`Server is running on http://localhost:3000`);
 });
