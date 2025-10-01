@@ -3,8 +3,14 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const mypublicRouter = require('./routes/mypublic');
-const myprivateRouter = require('./routes/myprivate');
+
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const path = require('path');
+const createError = require('http-errors');
+
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
 // console.log(process.env);
 // Allow environemnt port variable default to 3000
@@ -14,14 +20,37 @@ app.set('port', process.env.PORT || 3000);
 // How can pass the variables are required for process ?
 // Environmental variables - process.env / process.args
 
-app.set('view engine', 'ejs');
-app.set('views', './views_pages');
+// view engine setup
+app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views_pages'));
+
+// Middleware
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Set some global variables in express
 app.locals.siteTitle = 'Nodejs app';
 
-app.use(mypublicRouter);
-app.use('/private', myprivateRouter);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+// Catch 404 and forward to error handler
+app.use((req, res, next) => {
+  next(createError(404));
+});
+
+app.use(function (err, req, res, next) {
+  // set locals, only providing the error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 // Setup server to start listening
 

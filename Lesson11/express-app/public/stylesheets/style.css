@@ -1,0 +1,19 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grade", Helvetica, Arial, sans-serif,
+}
+
+a {
+    color: blue
+}
+
+h1 {
+    color: red
+}
+
+.my-box {
+    margin:0 auto;
+    width:300px;
+    text-align:center;
+    color:brown;
+}

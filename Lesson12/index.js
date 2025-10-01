@@ -1,21 +1,19 @@
-const mongodb = require('mongodb');
-const MongoClinet = mongodb.MongoClient;
 const url = 'mongodb://127.0.0.1:27017';
-const client = new MongoClinet(url);
+const dbName = 'mydatabase';
+const dbName2 = 'myFirstDb';
+import Database from './Database.js';
+const db = new Database(url, dbName);
+const db2 = new Database(url, dbName2);
+console.log(db.dbName);
+console.log(db2.dbName);
 
 async function run() {
   try {
-    await client.connect();
-    console.log('Connected successfully to mOngodb');
-    const database = client.db('mydatabase');
-    const collection = await database.collection('mycollection');
-    const data = await collection.find({}).toArray();
-    console.log('data=', data);
+    await db.connect();
+    await db.createCollection('mysecondCollection');
+    await db.getData('mycollection');
   } catch (err) {
-    console.error('Error on connecting to mongodb', err.message);
-  } finally {
-    await client.close();
-    console.log('Connection Closed');
+    console.error('Error on connecting to mongodb', err);
   }
 }
 
