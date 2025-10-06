@@ -39,6 +39,46 @@ class Database {
       console.error('❌ getData error:', err);
     }
   }
+
+  async insertData(collectionName, data) {
+    try {
+      const collection = this.selectCollection(collectionName);
+      if (Array.isArray(data)) {
+        const result = await collection.insertMany(data);
+        console.log('✅ Data inserted:', result.insertedCount);
+      } else {
+        const result = await collection.insertOne(data);
+        console.log('✅ Data inserted:', result.insertedId);
+      }
+    } catch (err) {
+      console.error('❌ insertData error:', err);
+    }
+  }
+
+  async updateData(collectionName, filter, data) {
+    try {
+      const collection = this.selectCollection(collectionName);
+      const result = await collection.updateOne(filter, { $set: data });
+      console.log('✅ Data updated:', result.modifiedCount);
+    } catch (err) {
+      console.error('❌ updateData error:', err);
+    }
+  }
+
+  async deleteData(collectionName, filter) {
+    try {
+      const collection = this.selectCollection(collectionName);
+      const result = await collection.deleteOne(filter);
+      console.log('✅ Data deleteData:', result.deletedCount);
+    } catch (err) {
+      console.error('❌ deleteData error:', err);
+    }
+  }
+
+  async close() {
+    await this.client.close();
+    console.log('✅ Connection Closed');
+  }
 }
 
 export default Database;

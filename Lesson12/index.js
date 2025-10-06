@@ -10,8 +10,15 @@ console.log(db2.dbName);
 async function run() {
   try {
     await db.connect();
-    await db.createCollection('mysecondCollection');
-    await db.getData('mycollection');
+    // await db.createCollection('mysecondCollection');
+    // await db.getData('mycollection');
+
+    // await db.insertData('users', [{ name: 'Alice2', age: 27 }]);
+
+    // await db.updateData('users', { name: 'Alice2' }, { age: 26 });
+    // await db.deleteData('users', { name: 'Alice2' });
+
+    await db.close();
   } catch (err) {
     console.error('Error on connecting to mongodb', err);
   }
